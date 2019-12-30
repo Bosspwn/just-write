@@ -374,7 +374,7 @@ export const applyMiddleware = (...middlewares) => createStore => (...args) => {
   }
   // 明显，只能使用一个中间件不符合预期，我们需要的是可以任意加减中间件，因此需要使用compose函数组合。
   // 更新dispatch，将中间件对dispatch的修改应用。
-  dispatch = compose(...middlewares.map(middleware => middleware(mid)))(store.dispatch);
+  dispatch = compose(...middlewares.map(middleware => middleware(dispatchAndGetState)))(store.dispatch);
 
   return {
     ...store,
